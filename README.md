@@ -1,5 +1,7 @@
 # pubgrok
-[![Version](http://img.shields.io/npm/v/pubgrok.svg)](https://www.npmjs.org/package/pubgrok)PubSub built using ngrok providing a simple, lightweight API
+PubSub built using ngrok providing a simple, lightweight API
+
+[![Version](http://img.shields.io/npm/v/pubgrok.svg)](https://www.npmjs.org/package/pubgrok)
 
 ## Installation
 
