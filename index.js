@@ -31,7 +31,7 @@ function PubSub (node, address) {
   this.publish = (topic, message) => {
     logger('publish')
 
-    if (typeof topic === 'string' && typeof message === 'string') {
+    if (typeof topic === 'string') {
       // send to all the other interested peers
       peers.forEach((peer) => {
         if (_intersection(peer.topics, [topic]).length > 0) {
@@ -42,7 +42,7 @@ function PubSub (node, address) {
           }
 
           request({
-            url: peer.address + '/pubgrok/publish',
+            url: peer.address + '/pubngrok/publish',
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(msg)
@@ -76,7 +76,7 @@ function PubSub (node, address) {
       }
 
       request({
-        url: peer.address + '/pubgrok/subscribe',
+        url: peer.address + '/pubngrok/subscribe',
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(msg)
@@ -109,7 +109,7 @@ function PubSub (node, address) {
       }
 
       request({
-        url: peer.address + '/pubgrok/unsubscribe',
+        url: peer.address + '/pubngrok/unsubscribe',
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(msg)
@@ -135,7 +135,7 @@ function PubSub (node, address) {
       }
 
       request({
-        url: newPeerInfo.address + '/pubgrok/connect',
+        url: newPeerInfo.address + '/pubngrok/connect',
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(msg)
@@ -160,7 +160,7 @@ function PubSub (node, address) {
           }
 
           request({
-            url: newPeerInfo.address + '/pubgrok/connect',
+            url: newPeerInfo.address + '/pubngrok/connect',
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(msg)
@@ -183,8 +183,8 @@ function PubSub (node, address) {
     return subscriptions
   }
 
-  node.post('/pubgrok/publish', function (req, res, next) {
-    logger('/pubgrok/publish')
+  node.post('/pubngrok/publish', function (req, res, next) {
+    logger('/pubngrok/publish')
 
     if (req.body !== undefined || req.body !== null) {
       const topic = req.body.topic
@@ -197,8 +197,8 @@ function PubSub (node, address) {
     }
   })
 
-  node.post('/pubgrok/subscribe', function (req, res, next) {
-    logger('/pubgrok/subscribe')
+  node.post('/pubngrok/subscribe', function (req, res, next) {
+    logger('/pubngrok/subscribe')
 
     if (req.body !== undefined || req.body !== null) {
       const peerTopics = req.body.topics
@@ -214,8 +214,8 @@ function PubSub (node, address) {
     }
   })
 
-  node.post('/pubgrok/unsubscribe', function (req, res, next) {
-    logger('/pubgrok/unsubscribe')
+  node.post('/pubngrok/unsubscribe', function (req, res, next) {
+    logger('/pubngrok/unsubscribe')
 
     if (req.body !== undefined || req.body !== null) {
       const peerTopics = req.body.topics
@@ -236,8 +236,8 @@ function PubSub (node, address) {
     }
   })
 
-  node.post('/pubgrok/connect', function (req, res, next) {
-    logger('/pubgrok/connect')
+  node.post('/pubngrok/connect', function (req, res, next) {
+    logger('/pubngrok/connect')
 
     if (req.body !== undefined || req.body !== null) {
       const newPeerInfo = req.body.peerInfo

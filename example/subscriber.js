@@ -34,7 +34,7 @@ function setUpPS (next) {
   ps = new PubSub(node, addr)
 
   const peerInfo = {
-    address: 'https://c8f5942d.ngrok.io', // paste publisher address
+    address: 'https://4bf9f0c0.ngrok.io', // paste publisher address
     topics: []
   }
 
@@ -54,7 +54,7 @@ function listen (err) {
 
   setTimeout(() => {
     ps.subscribe('interop')
-  }, 5000)
+  }, 4000)
 }
 
 series([
