@@ -155,11 +155,11 @@ function PubSub (node, address) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(msg)
       }, function (error, response, body) {
-        if (response === null || response === undefined || response.statusCode !== 200) {
-          removePeer(peer, peers)
-        } else {
-          logger("connected to " + newPeerInfo.address)
-          peers.push(newPeerInfo)
+        if (response !== null || response !== undefined) {
+          if (response.statusCode === 200) {
+            logger("connected to " + newPeerInfo.address)
+            peers.push(newPeerInfo)
+          }
         }
       })
     }
