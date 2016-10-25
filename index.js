@@ -155,7 +155,7 @@ function PubSub (node, address) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(msg)
       }, function (error, response, body) {
-        if (response !== null || response !== undefined) {
+        if (response !== null && response !== undefined) {
           if (response.statusCode === 200) {
             logger("connected to " + newPeerInfo.address)
             peers.push(newPeerInfo)
