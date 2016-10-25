@@ -49,6 +49,14 @@ function PubSub (node, address) {
           }, function (error, response, body) {
             if (response.statusCode === 200) {
               logger('published to ' + peer.address)
+            } else {
+              logger('publish to' + peer.address + ' failed, removing peer')
+
+              for (var i = 0; i < peers.length; i++) {
+                if (peers[i].address === peer.address) {
+                  peers.splice(i, 1);
+                }
+              }
             }
           })
         }
@@ -176,7 +184,13 @@ function PubSub (node, address) {
   }
 
   this.getPeers = () => {
-    return peers
+    var peerAddresses = []
+
+    peers.forEach((peer) => {
+      peerAddresses.push(peer.address)
+    })
+
+    return peerAddresses
   }
 
   this.getSubscriptions = () => {
@@ -245,6 +259,7 @@ function PubSub (node, address) {
 
       if (peers.length === 0) {
         peers.push(newPeerInfo)
+        that.connect(newPeerInfo)
         res.sendStatus(200)
       }
       else {
@@ -257,6 +272,7 @@ function PubSub (node, address) {
 
           if (i === peers.length - 1 && !exists) {
             peers.push(newPeerInfo)
+            that.connect(newPeerInfo)
             res.sendStatus(200)
           }
         }

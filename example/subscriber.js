@@ -12,7 +12,7 @@ let node
 let ps
 
 function bootNode (next) {
-  const port = 4001
+  const port = 4002
   node = express()
   node.use(bodyParser.json())
   node.use(bodyParser.urlencoded({ extended: true }))
@@ -34,7 +34,7 @@ function setUpPS (next) {
   ps = new PubSub(node, addr)
 
   const peerInfo = {
-    address: 'https://4bf9f0c0.ngrok.io', // paste publisher address
+    address: 'https://6c6241e1.ngrok.io', // paste publisher address
     topics: []
   }
 
@@ -54,7 +54,7 @@ function listen (err) {
 
   setTimeout(() => {
     ps.subscribe('interop')
-  }, 4000)
+  }, 3000)
 }
 
 series([
