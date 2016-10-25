@@ -15,6 +15,15 @@ function logger (msg) {
   }
 }
 
+function removePeer(peer, peers) {
+  logger('Request to ' + peer.address + ' failed, removing peer')
+  for (var i = 0; i < peers.length; i++) {
+    if (peers[i].address === peer.address) {
+      peers.splice(i, 1);
+    }
+  }
+}
+
 function PubSub (node, address) {
   if (!(this instanceof PubSub)) {
     return new PubSub(node, address)
@@ -25,8 +34,8 @@ function PubSub (node, address) {
   const that = this
 
   // peer structure { address: "<addr>", topics: [<topic1>, <topic2>] }
-  const peers = []
-  const subscriptions = []
+  var peers = []
+  var subscriptions = []
 
   this.publish = (topic, message) => {
     logger('publish')
@@ -47,16 +56,10 @@ function PubSub (node, address) {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(msg)
           }, function (error, response, body) {
-            if (response.statusCode === 200) {
-              logger('published to ' + peer.address)
+            if (response === null || response === undefined || response.statusCode !== 200) {
+              removePeer(peer, peers)
             } else {
-              logger('publish to' + peer.address + ' failed, removing peer')
-
-              for (var i = 0; i < peers.length; i++) {
-                if (peers[i].address === peer.address) {
-                  peers.splice(i, 1);
-                }
-              }
+              logger('published to ' + peer.address)
             }
           })
         }
@@ -89,7 +92,9 @@ function PubSub (node, address) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(msg)
       }, function (error, response, body) {
-        if (response.statusCode === 200) {
+        if (response === null || response === undefined || response.statusCode !== 200) {
+          removePeer(peer, peers)
+        } else {
           logger('subscribe sent to ' + peer.address)
         }
       })
@@ -122,7 +127,9 @@ function PubSub (node, address) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(msg)
       }, function (error, response, body) {
-        if (response.statusCode === 200) {
+        if (response === null || response === undefined || response.statusCode !== 200) {
+          removePeer(peer, peers)
+        } else {
           logger('unsubscribe sent to ' + peer.address)
         }
       })
@@ -148,7 +155,9 @@ function PubSub (node, address) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(msg)
       }, function (error, response, body) {
-        if (response.statusCode === 200) {
+        if (response === null || response === undefined || response.statusCode !== 200) {
+          removePeer(peer, peers)
+        } else {
           logger("connected to " + newPeerInfo.address)
           peers.push(newPeerInfo)
         }
@@ -173,7 +182,9 @@ function PubSub (node, address) {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(msg)
           }, function (error, response, body) {
-            if (response.statusCode === 200) {
+            if (response === null || response === undefined || response.statusCode !== 200) {
+              removePeer(peer, peers)
+            } else {
               console.log("Connected to " + newPeerInfo.address)
               peers.push(newPeerInfo)
             }

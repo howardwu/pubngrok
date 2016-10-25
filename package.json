@@ -1,6 +1,6 @@
 {
   "name": "pubngrok",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "Publish/Subscribe (PubSub) built with ngrok for simple, lightweight client communication",
   "main": "index.js",
   "scripts": {

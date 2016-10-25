@@ -34,7 +34,7 @@ function setUpPS (next) {
   ps = new PubSub(node, addr)
 
   const peerInfo = {
-    address: 'https://6c6241e1.ngrok.io', // paste publisher address
+    address: 'https://9cd185f9.ngrok.io', // paste publisher address
     topics: []
   }
 
