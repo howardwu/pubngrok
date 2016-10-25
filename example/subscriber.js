@@ -5,7 +5,7 @@ var express = require('express')
 var ngrok = require('ngrok')
 var series = require('run-series')
 
-const PubGrok = require('../')
+const PubSub = require('../')
 
 let addr
 let node
@@ -31,7 +31,7 @@ function bootNode (next) {
 
 function setUpPS (next) {
   console.log('attaching pubsub')
-  ps = new PubGrok(node, addr)
+  ps = new PubSub(node, addr)
 
   const peerInfo = {
     address: 'https://c8f5942d.ngrok.io', // paste publisher address

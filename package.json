@@ -1,7 +1,7 @@
 {
-  "name": "pubgrok",
-  "version": "1.0.2",
-  "description": "PubSub built using ngrok providing a simple, lightweight API",
+  "name": "pubngrok",
+  "version": "2.0.0",
+  "description": "Publish/Subscribe (PubSub) built with ngrok for simple, lightweight client communication",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

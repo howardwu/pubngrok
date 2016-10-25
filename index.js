@@ -5,9 +5,9 @@ const _uniq = require('lodash.uniq')
 const EE = require('events').EventEmitter
 const request = require('request')
 
-module.exports = PubGrok
+module.exports = PubSub
 
-PubGrok.prototype.__proto__ = EE.prototype;
+PubSub.prototype.__proto__ = EE.prototype;
 
 function logger (msg) {
   if (process.env.DEBUG) {
@@ -15,9 +15,9 @@ function logger (msg) {
   }
 }
 
-function PubGrok (node, address) {
-  if (!(this instanceof PubGrok)) {
-    return new PubGrok(node, address)
+function PubSub (node, address) {
+  if (!(this instanceof PubSub)) {
+    return new PubSub(node, address)
   }
 
   EE.call(this)

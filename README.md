@@ -1,13 +1,13 @@
-# pubgrok
-[![Version](http://img.shields.io/npm/v/pubgrok.svg)](https://www.npmjs.org/package/pubgrok)
+# pubngrok
+[![Version](http://img.shields.io/npm/v/pubngrok.svg)](https://www.npmjs.org/package/pubngrok)
 
-PubSub built using ngrok providing a simple, lightweight API
+Publish/Subscribe (PubSub) built with ngrok for simple, lightweight client communication
 
 ## Installation
 
 Install via commmand line with:
 ```
-  npm install pubgrok
+  npm install pubngrok
 ```
 
 Install the library dependencies with:
